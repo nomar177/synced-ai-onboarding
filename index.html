@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Onboarding | Synced AI</title>
+  <meta name="description" content="Synced AI client onboarding" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #000;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem 4rem;
+      color: #fff;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 2.5rem;
+    }
+
+    .logo-text {
+      color: #fff;
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .progress-bar {
+      width: 100%;
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+    }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .progress-label {
+      font-size: 11px;
+      color: #555;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      transition: color .3s;
+    }
+
+    .progress-label.active { color: #fff; }
+    .progress-label.done { color: #888; }
+
+    .progress-track {
+      height: 2px;
+      background: #222;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #fff;
+      border-radius: 2px;
+      transition: width .5s cubic-bezier(.4,0,.2,1);
+    }
+
+    .card {
+      width: 100%;
+      max-width: 520px;
+      background: #111;
+      border: 0.5px solid #222;
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+    }
+
+    .step-badge {
+      display: inline-block;
+      font-size: 11px;
+      color: #555;
+      font-weight: 500;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: .75rem;
+      line-height: 1.3;
+    }
+
+    p.sub {
+      font-size: 14px;
+      color: #888;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group { margin-bottom: 1rem; }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      color: #888;
+      font-weight: 500;
+      margin-bottom: 6px;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+    }
+
+    .optional-tag {
+      font-size: 10px;
+      color: #444;
+      font-weight: 400;
+      text-transform: none;
+      margin-left: 6px;
+      letter-spacing: 0;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: #000;
+      border: 0.5px solid #333;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 14px;
+      color: #fff;
+      outline: none;
+      transition: border-color .2s;
+      font-family: inherit;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: #555; }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: #444; }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 90px;
+      line-height: 1.6;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 480px) {
+      .form-row { grid-template-columns: 1fr; }
+      .progress-label { font-size: 9px; }
+    }
+
+    .btn-primary {
+      width: 100%;
+      margin-top: 1.5rem;
+      padding: 12px 24px;
+      background: #fff;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background .2s, transform .1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-primary:hover { background: #eee; }
+    .btn-primary:active { transform: scale(.98); }
+
+    .btn-ghost {
+      width: 100%;
+      margin-top: 8px;
+      padding: 12px 24px;
+      background: transparent;
+      color: #555;
+      border: 0.5px solid #333;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: inherit;
+      transition: color .2s, border-color .2s;
+    }
+
+    .btn-ghost:hover { color: #888; border-color: #444; }
+
+    .leadsie-box {
+      background: #000;
+      border: 0.5px solid #333;
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .leadsie-icon {
+      width: 48px;
+      height: 48px;
+      background: #1877F2;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      color: #fff;
+      font-size: 22px;
+    }
+
+    .leadsie-box h3 {
+      font-size: 15px;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: .5rem;
+    }
+
+    .leadsie-box p {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 1.25rem;
+    }
+
+    .btn-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: #1877F2;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background .2s;
+      text-decoration: none;
+    }
+
+    .btn-meta:hover { background: #1565d8; }
+
+    .connected-badge {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      background: #0a2a0a;
+      border: 0.5px solid #1a4a1a;
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 13px;
+      color: #4ade80;
+      margin-top: 1rem;
+      justify-content: center;
+    }
+
+    .checklist { list-style: none; margin-bottom: 1.5rem; }
+
+    .checklist li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 0.5px solid #1a1a1a;
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    .checklist li:last-child { border-bottom: none; }
+
+    .check-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 0.5px solid #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 11px;
+      color: #4ade80;
+    }
+
+    .check-dot.done { background: #0a2a0a; border-color: #1a4a1a; }
+
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #0a2a0a;
+      border: 0.5px solid #1a4a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 28px;
+      color: #4ade80;
+    }
+
+    .step { display: none; }
+    .step.active { display: block; }
+    .error-ring { border-color: #7f1d1d !important; }
+  </style>
+</head>
+<body>
+
+  <div class="logo-area">
+    <svg width="36" height="24" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 16 C4 16, 5 8, 7 8 C9 8, 10 20, 12 20 C14 20, 15 4, 17 4 C19 4, 20 18, 22 18 C24 18, 25 10, 27 10 C29 10, 30 14, 34 14" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+    <span class="logo-text">Synced AI</span>
+  </div>
+
+  <div class="progress-bar">
+    <div class="progress-labels">
+      <span class="progress-label active" id="pl-1">Welcome</span>
+      <span class="progress-label" id="pl-2">Your info</span>
+      <span class="progress-label" id="pl-3">Connect Meta</span>
+      <span class="progress-label" id="pl-4">Tell us more</span>
+      <span class="progress-label" id="pl-5">Done</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="prog-fill" style="width:10%"></div>
+    </div>
+  </div>
+
+  <div class="card">
+
+    <div class="step active" id="step-1">
+      <span class="step-badge">Step 1 of 5</span>
+      <h1>Welcome — let's get you set up</h1>
+      <p class="sub">This takes about 3 minutes. We'll collect your info, connect your Meta account, and learn a little about your goals so we can hit the ground running.</p>
+      <ul class="checklist">
+        <li><span class="check-dot"></span>Your contact & business details</li>
+        <li><span class="check-dot"></span>Connect your Meta Business account</li>
+        <li><span class="check-dot"></span>Tell us about your goals</li>
+      </ul>
+      <button class="btn-primary" onclick="goTo(2)">
+        Let's get started <i class="ti ti-arrow-right" style="font-size:14px;"></i>
+      </button>
+    </div>
+
+    <div class="step" id="step-2">
+      <span class="step-badge">Step 2 of 5</span>
+      <h1>Your information</h1>
+      <p class="sub">Let's start with the basics so we can get your account created.</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>First name</label>
+          <input type="text" id="f-fname" placeholder="John" />
+        </div>
+        <div class="form-group">
+          <label>Last name</label>
+          <input type="text" id="f-lname" placeholder="Smith" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Business name</label>
+        <input type="text" id="f-bizname" placeholder="e.g. Clearflow Pool Service" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="text" id="f-phone" placeholder="(817) 000-0000" />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="f-email" placeholder="you@business.com" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>EIN / Tax ID <span class="optional-tag">optional — needed for A2P</span></label>
+        <input type="text" id="f-ein" placeholder="XX-XXXXXXX" />
+      </div>
+      <button class="btn-primary" onclick="validateStep2()">
+        Continue <i class="ti ti-arrow-right" style="font-size:14px;"></i>
+      </button>
+    </div>
+
+    <div class="step" id="step-3">
+      <span class="step-badge">Step 3 of 5</span>
+      <h1>Connect your Meta account</h1>
+      <p class="sub">Click below and follow the guided steps to share access to your Meta Business Manager, Ad Account, and Facebook Page. Takes about 60 seconds.</p>
+      <div class="leadsie-box">
+        <div class="leadsie-icon">
+          <i class="ti ti-brand-facebook"></i>
+        </div>
+        <h3>Connect via Leadsie</h3>
+        <p>Secure, one-click access — no passwords shared</p>
+        <a class="btn-meta" href="https://app.leadsie.com/connect/request/6a20aa5e3c61b6df882c74f9" target="_blank" rel="noopener" onclick="setTimeout(showMetaConnected, 2500)">
+          <i class="ti ti-brand-facebook" style="font-size:16px;"></i>
+          Connect Meta account
+        </a>
+        <div class="connected-badge" id="meta-connected">
+          <i class="ti ti-check" style="font-size:14px;"></i> Meta connected
+        </div>
+      </div>
+      <p class="sub" style="font-size:12px;color:#444;text-align:center;margin-bottom:0;">After connecting, click continue below</p>
+      <button class="btn-primary" id="btn-step3" style="display:none;" onclick="goTo(4)">
+        Continue <i class="ti ti-arrow-right" style="font-size:14px;"></i>
+      </button>
+      <button class="btn-ghost" id="btn-step3-skip" onclick="goTo(4)">I'll do this later</button>
+    </div>
+
+    <div class="step" id="step-4">
+      <span class="step-badge">Step 4 of 5</span>
+      <h1>Let's talk about your business</h1>
+      <p class="sub">A few questions so our team understands where you're at and what you need — this helps us skip the small talk on our first call.</p>
+      <div class="form-group">
+        <label>What calendar do you use?</label>
+        <input type="text" id="q-cal" placeholder="e.g. Google Calendar, Outlook, Apple Calendar..." />
+      </div>
+      <div class="form-group">
+        <label>How many clients do you want to close in the next 4 months?</label>
+        <input type="text" id="q-goal" placeholder="e.g. 10 new clients" />
+      </div>
+      <div class="form-group">
+        <label>How have your marketing efforts looked in the last few months?</label>
+        <textarea id="q-marketing" placeholder="Tell us what you've tried — ads, referrals, social media, word of mouth..."></textarea>
+      </div>
+      <button class="btn-primary" onclick="validateStep4()">
+        Continue <i class="ti ti-arrow-right" style="font-size:14px;"></i>
+      </button>
+    </div>
+
+    <div class="step" id="step-5">
+      <div class="success-icon"><i class="ti ti-check" style="font-size:28px;"></i></div>
+      <span class="step-badge">You're in!</span>
+      <h1>Welcome to Synced AI</h1>
+      <p class="sub">We've received everything we need. Our team will review your info and reach out within 1 business day to get things moving.</p>
+      <ul class="checklist">
+        <li><span class="check-dot done"><i class="ti ti-check"></i></span>Business info received</li>
+        <li><span class="check-dot done"><i class="ti ti-check"></i></span>Meta access requested</li>
+        <li><span class="check-dot done"><i class="ti ti-check"></i></span>Goals & context noted</li>
+        <li><span class="check-dot"></span>Team review — up next</li>
+      </ul>
+      <p style="font-size:13px;color:#555;margin-top:1.5rem;text-align:center;line-height:1.7;">
+        Questions? Email us at info@syncedlead.com or reach out to the team.
+      </p>
+    </div>
+
+  </div>
+
+  <script>
+    const progWidths = ['10%', '30%', '55%', '78%', '100%'];
+    const cur = { step: 1 };
+
+    function goTo(n) {
+      document.getElementById('step-' + cur.step).classList.remove('active');
+      document.getElementById('step-' + n).classList.add('active');
+      cur.step = n;
+      document.getElementById('prog-fill').style.width = progWidths[n - 1];
+      for (let i = 1; i <= 5; i++) {
+        const el = document.getElementById('pl-' + i);
+        el.classList.remove('active', 'done');
+        if (i === n) el.classList.add('active');
+        else if (i < n) el.classList.add('done');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function highlight(id) {
+      const el = document.getElementById(id);
+      el.classList.add('error-ring');
+      el.focus();
+      setTimeout(() => el.classList.remove('error-ring'), 2000);
+    }
+
+    function validateStep2() {
+      const required = ['f-fname', 'f-lname', 'f-bizname', 'f-phone', 'f-email'];
+      for (const id of required) {
+        if (!document.getElementById(id).value.trim()) { highlight(id); return; }
+      }
+      goTo(3);
+    }
+
+    function validateStep4() {
+      const required = ['q-cal', 'q-goal', 'q-marketing'];
+      for (const id of required) {
+        if (!document.getElementById(id).value.trim()) { highlight(id); return; }
+      }
+      goTo(5);
+    }
+
+    function showMetaConnected() {
+      document.getElementById('meta-connected').style.display = 'flex';
+      document.getElementById('btn-step3').style.display = 'flex';
+      document.getElementById('btn-step3-skip').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
