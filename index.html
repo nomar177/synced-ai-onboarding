@@ -496,6 +496,27 @@
       for (const id of required) {
         if (!document.getElementById(id).value.trim()) { highlight(id); return; }
       }
+      submitToSheet();
+    }
+
+    function submitToSheet() {
+      const data = {
+        fname:     document.getElementById('f-fname').value.trim(),
+        lname:     document.getElementById('f-lname').value.trim(),
+        bizname:   document.getElementById('f-bizname').value.trim(),
+        phone:     document.getElementById('f-phone').value.trim(),
+        email:     document.getElementById('f-email').value.trim(),
+        ein:       document.getElementById('f-ein').value.trim(),
+        calendar:  document.getElementById('q-cal').value.trim(),
+        goal:      document.getElementById('q-goal').value.trim(),
+        marketing: document.getElementById('q-marketing').value.trim()
+      };
+
+      fetch('https://script.google.com/a/macros/syncedlead.com/s/AKfycbxRRqIMm_CHQ1KHQZqsN_YseNh2EQ2tr6rvIVVa2nSdYor9pZLAobs0Cn1U_XgZxAHg/exec', {
+        method: 'POST',
+        body: JSON.stringify(data)
+      }).catch(() => {});
+
       goTo(5);
     }
 
