@@ -8,6 +8,7 @@
  */
 
 const SHEET_NAME = 'Onboarding';
+const NOTIFY_EMAIL = 'info@syncedlead.com';  // who gets an email when a client finishes; '' turns it off
 
 // Column headers, in order. `key` matches the field names the form sends.
 const COLUMNS = [
@@ -91,7 +92,36 @@ function saveSubmission(data) {
   } else {
     sheet.getRange(rowIndex, 1, 1, row.length).setValues([row]);
   }
+
+  // Email the team the first time a submission is finished
+  const statusCol = COLUMNS.findIndex(function (c) { return c.key === 'status'; });
+  const wasComplete = existing && existing[statusCol] === 'Complete';
+  if (NOTIFY_EMAIL && row[statusCol] === 'Complete' && !wasComplete) {
+    try {
+      sendNotification(row);
+    } catch (err) {
+      console.error('Notification email failed:', err);  // the row is saved either way
+    }
+  }
   return id;
+}
+
+function sendNotification(row) {
+  const get = function (key) {
+    return String(row[COLUMNS.findIndex(function (c) { return c.key === key; })] || '').replace(/^'/, '');
+  };
+  const name = (get('fname') + ' ' + get('lname')).trim();
+  const lines = COLUMNS
+    .filter(function (c) { return ['id', 'status', 'started', 'updated', 'ein'].indexOf(c.key) === -1; })
+    .map(function (c) { return c.header + ': ' + (get(c.key) || '-'); });
+
+  MailApp.sendEmail({
+    to: NOTIFY_EMAIL,
+    replyTo: get('email'),
+    subject: 'New onboarding: ' + (get('bizname') || name),
+    body: name + ' just finished the onboarding form.\n\n' + lines.join('\n') +
+      '\n\nFull details (including EIN) in the sheet:\n' + SpreadsheetApp.getActiveSpreadsheet().getUrl(),
+  });
 }
 
 function getSheet() {
