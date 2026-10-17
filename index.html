@@ -233,6 +233,14 @@
     .step.active { display: block; }
     .error-ring { border-color: #7f1d1d !important; }
 
+    .field-error {
+      display: none;
+      margin-top: 6px;
+      font-size: 12px;
+      color: #fca5a5;
+      line-height: 1.5;
+    }
+
     .btn-back {
       display: inline-flex;
       align-items: center;
@@ -456,6 +464,7 @@
         <div class="form-group">
           <label>Email</label>
           <input type="email" id="f-email" placeholder="you@business.com" />
+          <p class="field-error" id="err-email">That doesn't look like a valid email address — please check it.</p>
         </div>
       </div>
       <div class="form-group">
@@ -550,6 +559,10 @@
     const META_VIDEO_URL = '';                    // Loom or YouTube embed link; leave empty to hide the video
     const STORAGE_KEY = 'synced-onboarding';
 
+    // Deliberately loose: catches real typos (missing @, no domain, stray spaces)
+    // without rejecting unusual but valid addresses.
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
     const FIELDS = ['f-fname', 'f-lname', 'f-bizname', 'f-phone', 'f-email', 'f-ein', 'q-cal', 'q-goal', 'q-marketing'];
     const NOT_STORED = ['f-ein'];  // kept out of the browser's saved progress
 
@@ -604,6 +617,12 @@
       for (const id of required) {
         if (!document.getElementById(id).value.trim()) { highlight(id); return; }
       }
+      if (!EMAIL_RE.test(document.getElementById('f-email').value.trim())) {
+        showEmailError(true);
+        highlight('f-email');
+        return;
+      }
+      showEmailError(false);
       goTo(3);
       // Save their contact info now, so we have it even if they stop here
       sendToSheet('partial').catch(() => {});
@@ -626,6 +645,10 @@
         if (!document.getElementById(id).value.trim()) { highlight(id); return; }
       }
       submitFinal();
+    }
+
+    function showEmailError(show) {
+      document.getElementById('err-email').style.display = show ? 'block' : 'none';
     }
 
     function metaStatus() {
@@ -751,6 +774,7 @@
     }
 
     FIELDS.forEach((id) => document.getElementById(id).addEventListener('input', saveProgress));
+    document.getElementById('f-email').addEventListener('input', () => showEmailError(false));
     document.querySelectorAll('input[name="meta"]').forEach((r) => r.addEventListener('change', saveProgress));
 
     const startStep = restoreProgress();
