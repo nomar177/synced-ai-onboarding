@@ -186,91 +186,6 @@
     .btn-primary:hover { background: #eee; }
     .btn-primary:active { transform: scale(.98); }
 
-    .btn-ghost {
-      width: 100%;
-      margin-top: 8px;
-      padding: 12px 24px;
-      background: transparent;
-      color: #555;
-      border: 0.5px solid #333;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      font-family: inherit;
-      transition: color .2s, border-color .2s;
-    }
-
-    .btn-ghost:hover { color: #888; border-color: #444; }
-
-    .leadsie-box {
-      background: #000;
-      border: 0.5px solid #333;
-      border-radius: 12px;
-      padding: 1.5rem;
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-
-    .leadsie-icon {
-      width: 48px;
-      height: 48px;
-      background: #1877F2;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1rem;
-      color: #fff;
-      font-size: 22px;
-    }
-
-    .leadsie-box h3 {
-      font-size: 15px;
-      font-weight: 500;
-      color: #fff;
-      margin-bottom: .5rem;
-    }
-
-    .leadsie-box p {
-      font-size: 13px;
-      color: #666;
-      margin-bottom: 1.25rem;
-    }
-
-    .btn-meta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      background: #1877F2;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      font-family: inherit;
-      transition: background .2s;
-      text-decoration: none;
-    }
-
-    .btn-meta:hover { background: #1565d8; }
-
-    .connected-badge {
-      display: none;
-      align-items: center;
-      gap: 6px;
-      background: #0a2a0a;
-      border: 0.5px solid #1a4a1a;
-      border-radius: 20px;
-      padding: 6px 14px;
-      font-size: 13px;
-      color: #4ade80;
-      margin-top: 1rem;
-      justify-content: center;
-    }
-
     .checklist { list-style: none; margin-bottom: 1.5rem; }
 
     .checklist li {
@@ -317,6 +232,163 @@
     .step { display: none; }
     .step.active { display: block; }
     .error-ring { border-color: #7f1d1d !important; }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: none;
+      border: none;
+      color: #555;
+      font-size: 13px;
+      font-family: inherit;
+      cursor: pointer;
+      padding: 0;
+      margin-bottom: 1rem;
+      transition: color .2s;
+    }
+
+    .btn-back:hover { color: #aaa; }
+
+    .btn-primary:disabled { opacity: .6; cursor: default; transform: none; }
+
+    .spinner {
+      width: 14px;
+      height: 14px;
+      border: 2px solid #999;
+      border-top-color: #000;
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .error-box {
+      display: none;
+      margin-top: 1rem;
+      background: #1a0808;
+      border: 0.5px solid #7f1d1d;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: #fca5a5;
+      line-height: 1.6;
+    }
+
+    .error-box a { color: #fca5a5; }
+
+    /* Meta access step */
+    .meta-video {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 0.5px solid #333;
+      margin-bottom: 1.25rem;
+      background: #000;
+    }
+
+    .meta-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+    .meta-steps {
+      list-style: none;
+      counter-reset: meta;
+      background: #000;
+      border: 0.5px solid #333;
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .meta-steps li {
+      counter-increment: meta;
+      position: relative;
+      padding: 10px 0 10px 34px;
+      font-size: 14px;
+      color: #aaa;
+      line-height: 1.6;
+      border-bottom: 0.5px solid #1a1a1a;
+    }
+
+    .meta-steps li:last-child { border-bottom: none; }
+
+    .meta-steps li::before {
+      content: counter(meta);
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 0.5px solid #333;
+      font-size: 11px;
+      color: #888;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .meta-steps strong { color: #fff; font-weight: 500; }
+    .meta-steps a { color: #fff; }
+
+    .copy-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .copy-row code {
+      background: #111;
+      border: 0.5px solid #333;
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 13px;
+      color: #fff;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    .btn-copy {
+      background: none;
+      border: 0.5px solid #333;
+      border-radius: 6px;
+      color: #888;
+      font-size: 12px;
+      font-family: inherit;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .btn-copy:hover { color: #fff; border-color: #555; }
+
+    .choice-label {
+      font-size: 12px;
+      color: #888;
+      font-weight: 500;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .choice {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 0.5px solid #333;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #aaa;
+      transition: border-color .2s, color .2s;
+    }
+
+    .choice:hover { border-color: #555; }
+    .choice input { accent-color: #fff; width: 16px; height: 16px; }
+    .choice:has(input:checked) { border-color: #fff; color: #fff; }
+    .choices.error-ring .choice { border-color: #7f1d1d; }
   </style>
 </head>
 <body>
@@ -332,7 +404,7 @@
     <div class="progress-labels">
       <span class="progress-label active" id="pl-1">Welcome</span>
       <span class="progress-label" id="pl-2">Your info</span>
-      <span class="progress-label" id="pl-3">Connect Meta</span>
+      <span class="progress-label" id="pl-3">Meta access</span>
       <span class="progress-label" id="pl-4">Tell us more</span>
       <span class="progress-label" id="pl-5">Done</span>
     </div>
@@ -349,7 +421,7 @@
       <p class="sub">This takes about 3 minutes. We'll collect your info, connect your Meta account, and learn a little about your goals so we can hit the ground running.</p>
       <ul class="checklist">
         <li><span class="check-dot"></span>Your contact & business details</li>
-        <li><span class="check-dot"></span>Connect your Meta Business account</li>
+        <li><span class="check-dot"></span>Give us access to your Meta Business account</li>
         <li><span class="check-dot"></span>Tell us about your goals</li>
       </ul>
       <button class="btn-primary" onclick="goTo(2)">
@@ -358,6 +430,7 @@
     </div>
 
     <div class="step" id="step-2">
+      <button class="btn-back" onclick="goBack()"><i class="ti ti-arrow-left"></i> Back</button><br>
       <span class="step-badge">Step 2 of 5</span>
       <h1>Your information</h1>
       <p class="sub">Let's start with the basics so we can get your account created.</p>
@@ -395,31 +468,39 @@
     </div>
 
     <div class="step" id="step-3">
+      <button class="btn-back" onclick="goBack()"><i class="ti ti-arrow-left"></i> Back</button><br>
       <span class="step-badge">Step 3 of 5</span>
-      <h1>Connect your Meta account</h1>
-      <p class="sub">Click below and follow the guided steps to share access to your Meta Business Manager, Ad Account, and Facebook Page. Takes about 60 seconds.</p>
-      <div class="leadsie-box">
-        <div class="leadsie-icon">
-          <i class="ti ti-brand-facebook"></i>
-        </div>
-        <h3>Connect via Leadsie</h3>
-        <p>Secure, one-click access — no passwords shared</p>
-        <a class="btn-meta" href="https://app.leadsie.com/connect/request/6a20aa5e3c61b6df882c74f9" target="_blank" rel="noopener" onclick="setTimeout(showMetaConnected, 2500)">
-          <i class="ti ti-brand-facebook" style="font-size:16px;"></i>
-          Connect Meta account
-        </a>
-        <div class="connected-badge" id="meta-connected">
-          <i class="ti ti-check" style="font-size:14px;"></i> Meta connected
-        </div>
+      <h1>Give us access to your Meta account</h1>
+      <p class="sub">We run your ads through your own Meta Business account, so you stay the owner. Adding us as a partner takes about 2 minutes, and you never share your password.</p>
+
+      <div class="meta-video" id="meta-video" style="display:none;"></div>
+
+      <ol class="meta-steps">
+        <li>Open <a href="https://business.facebook.com/settings" target="_blank" rel="noopener"><strong>Meta Business Settings</strong></a> and sign in with the Facebook account that manages your business.</li>
+        <li>In the left menu, go to <strong>Users → Partners</strong>, click <strong>Add</strong>, then choose <strong>Give a partner access to your assets</strong>.</li>
+        <li>Paste our Business ID:
+          <div class="copy-row">
+            <code id="meta-partner-id"></code>
+            <button class="btn-copy" type="button" onclick="copyPartnerId(this)">Copy</button>
+          </div>
+        </li>
+        <li>Select your <strong>Facebook Page</strong> and <strong>Ad account</strong>, turn on <strong>full control</strong> for both, and click <strong>Save</strong>.</li>
+      </ol>
+
+      <p class="choice-label">Where are you at?</p>
+      <div class="choices" id="meta-choices">
+        <label class="choice"><input type="radio" name="meta" value="shared" /> Done, I've added Synced AI as a partner</label>
+        <label class="choice"><input type="radio" name="meta" value="needs_help" /> I got stuck or don't have a Business account. Help me on our call</label>
+        <label class="choice"><input type="radio" name="meta" value="later" /> I'll do this later</label>
       </div>
-      <p class="sub" style="font-size:12px;color:#444;text-align:center;margin-bottom:0;">After connecting, click continue below</p>
-      <button class="btn-primary" id="btn-step3" style="display:none;" onclick="goTo(4)">
+
+      <button class="btn-primary" onclick="validateStep3()">
         Continue <i class="ti ti-arrow-right" style="font-size:14px;"></i>
       </button>
-      <button class="btn-ghost" id="btn-step3-skip" onclick="goTo(4)">I'll do this later</button>
     </div>
 
     <div class="step" id="step-4">
+      <button class="btn-back" onclick="goBack()"><i class="ti ti-arrow-left"></i> Back</button><br>
       <span class="step-badge">Step 4 of 5</span>
       <h1>Let's talk about your business</h1>
       <p class="sub">A few questions so our team understands where you're at and what you need — this helps us skip the small talk on our first call.</p>
@@ -435,9 +516,13 @@
         <label>How have your marketing efforts looked in the last few months?</label>
         <textarea id="q-marketing" placeholder="Tell us what you've tried — ads, referrals, social media, word of mouth..."></textarea>
       </div>
-      <button class="btn-primary" onclick="validateStep4()">
-        Continue <i class="ti ti-arrow-right" style="font-size:14px;"></i>
+      <button class="btn-primary" id="btn-submit" onclick="validateStep4()">
+        Submit <i class="ti ti-arrow-right" style="font-size:14px;"></i>
       </button>
+      <div class="error-box" id="submit-error">
+        We couldn't save your answers. Check your connection and click <strong>Submit</strong> again.
+        If it keeps happening, email us at <a href="mailto:info@syncedlead.com">info@syncedlead.com</a>. Your answers are still here.
+      </div>
     </div>
 
     <div class="step" id="step-5">
@@ -447,7 +532,7 @@
       <p class="sub">We've received everything we need. Our team will review your info and reach out within 1 business day to get things moving.</p>
       <ul class="checklist">
         <li><span class="check-dot done"><i class="ti ti-check"></i></span>Business info received</li>
-        <li><span class="check-dot done"><i class="ti ti-check"></i></span>Meta access requested</li>
+        <li id="done-meta"><span class="check-dot done"><i class="ti ti-check"></i></span>Meta access shared</li>
         <li><span class="check-dot done"><i class="ti ti-check"></i></span>Goals & context noted</li>
         <li><span class="check-dot"></span>Team review — up next</li>
       </ul>
@@ -459,10 +544,40 @@
   </div>
 
   <script>
+    // ---- Settings ----
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxiVIOb9_RG-05xuasPe2AQSh4Yr3NN_i9iYPp5mq9LWwEYXZaMVBrEcJ1HSYT3exkw/exec';
+    const META_PARTNER_ID = '1677143463706346';  // Synced AI's Meta Business portfolio ID
+    const META_VIDEO_URL = '';                    // Loom or YouTube embed link; leave empty to hide the video
+    const STORAGE_KEY = 'synced-onboarding';
+
+    const FIELDS = ['f-fname', 'f-lname', 'f-bizname', 'f-phone', 'f-email', 'f-ein', 'q-cal', 'q-goal', 'q-marketing'];
+    const NOT_STORED = ['f-ein'];  // kept out of the browser's saved progress
+
     const progWidths = ['10%', '30%', '55%', '78%', '100%'];
     const cur = { step: 1 };
+    let submissionId = null;
 
-    function goTo(n) {
+    // ---- Navigation ----
+    function goTo(n, fromHistory) {
+      if (n === cur.step) return;
+      if (!fromHistory) history.pushState({ step: n }, '');
+      showStep(n);
+      if (n < 5) saveProgress();
+    }
+
+    function goBack() {
+      history.back();
+    }
+
+    window.addEventListener('popstate', (e) => {
+      // Once submitted, stay on the confirmation screen
+      if (cur.step === 5) { history.pushState({ step: 5 }, ''); return; }
+      const n = e.state && e.state.step ? e.state.step : 1;
+      showStep(n);
+      saveProgress();
+    });
+
+    function showStep(n) {
       document.getElementById('step-' + cur.step).classList.remove('active');
       document.getElementById('step-' + n).classList.add('active');
       cur.step = n;
@@ -483,12 +598,26 @@
       setTimeout(() => el.classList.remove('error-ring'), 2000);
     }
 
+    // ---- Validation ----
     function validateStep2() {
       const required = ['f-fname', 'f-lname', 'f-bizname', 'f-phone', 'f-email'];
       for (const id of required) {
         if (!document.getElementById(id).value.trim()) { highlight(id); return; }
       }
       goTo(3);
+      // Save their contact info now, so we have it even if they stop here
+      sendToSheet('partial').catch(() => {});
+    }
+
+    function validateStep3() {
+      if (!metaStatus()) {
+        const box = document.getElementById('meta-choices');
+        box.classList.add('error-ring');
+        setTimeout(() => box.classList.remove('error-ring'), 2000);
+        return;
+      }
+      goTo(4);
+      sendToSheet('partial').catch(() => {});
     }
 
     function validateStep4() {
@@ -496,36 +625,140 @@
       for (const id of required) {
         if (!document.getElementById(id).value.trim()) { highlight(id); return; }
       }
-      submitToSheet();
+      submitFinal();
     }
 
-    function submitToSheet() {
-      const data = {
-        fname:     document.getElementById('f-fname').value.trim(),
-        lname:     document.getElementById('f-lname').value.trim(),
-        bizname:   document.getElementById('f-bizname').value.trim(),
-        phone:     document.getElementById('f-phone').value.trim(),
-        email:     document.getElementById('f-email').value.trim(),
-        ein:       document.getElementById('f-ein').value.trim(),
-        calendar:  document.getElementById('q-cal').value.trim(),
-        goal:      document.getElementById('q-goal').value.trim(),
-        marketing: document.getElementById('q-marketing').value.trim()
+    function metaStatus() {
+      const checked = document.querySelector('input[name="meta"]:checked');
+      return checked ? checked.value : '';
+    }
+
+    // ---- Sending to Google Sheets ----
+    function collectData(status) {
+      const val = (id) => document.getElementById(id).value.trim();
+      return {
+        id:        submissionId,
+        status:    status,
+        fname:     val('f-fname'),
+        lname:     val('f-lname'),
+        bizname:   val('f-bizname'),
+        phone:     val('f-phone'),
+        email:     val('f-email'),
+        ein:       val('f-ein'),
+        meta:      metaStatus(),
+        calendar:  val('q-cal'),
+        goal:      val('q-goal'),
+        marketing: val('q-marketing')
       };
+    }
 
-      fetch('https://script.google.com/macros/s/AKfycbxiVIOb9_RG-05xuasPe2AQSh4Yr3NN_i9iYPp5mq9LWwEYXZaMVBrEcJ1HSYT3exkw/exec', {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify(data)
-      }).catch(() => {});
+    // Resolves only when the sheet confirms the row was saved
+    async function sendToSheet(status) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 20000);
+      try {
+        const res = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify(collectData(status)),
+          signal: controller.signal
+        });
+        const result = await res.json();
+        if (!result.ok) throw new Error(result.error || 'Save failed');
+        return result;
+      } finally {
+        clearTimeout(timer);
+      }
+    }
 
+    async function submitFinal() {
+      const btn = document.getElementById('btn-submit');
+      const errorBox = document.getElementById('submit-error');
+      const originalLabel = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span> Submitting...';
+      errorBox.style.display = 'none';
+
+      try {
+        await sendToSheet('complete');
+      } catch (err) {
+        console.error('Submission failed:', err);
+        errorBox.style.display = 'block';
+        btn.disabled = false;
+        btn.innerHTML = originalLabel;
+        return;
+      }
+
+      updateDoneScreen();
+      clearProgress();
       goTo(5);
     }
 
-    function showMetaConnected() {
-      document.getElementById('meta-connected').style.display = 'flex';
-      document.getElementById('btn-step3').style.display = 'flex';
-      document.getElementById('btn-step3-skip').style.display = 'none';
+    function updateDoneScreen() {
+      if (metaStatus() === 'shared') return;
+      document.getElementById('done-meta').innerHTML =
+        '<span class="check-dot"></span>Meta access: we\'ll help you set this up on our call';
+    }
+
+    // ---- Saved progress (survives refresh) ----
+    function saveProgress() {
+      try {
+        const values = {};
+        FIELDS.forEach((id) => { if (!NOT_STORED.includes(id)) values[id] = document.getElementById(id).value; });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ id: submissionId, step: cur.step, meta: metaStatus(), values }));
+      } catch (e) {}
+    }
+
+    function clearProgress() {
+      try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+    }
+
+    function restoreProgress() {
+      let saved = null;
+      try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch (e) {}
+      submissionId = (saved && saved.id) || newId();
+      if (!saved) return 1;
+
+      Object.entries(saved.values || {}).forEach(([id, value]) => {
+        const el = document.getElementById(id);
+        if (el) el.value = value;
+      });
+      if (saved.meta) {
+        const radio = document.querySelector('input[name="meta"][value="' + saved.meta + '"]');
+        if (radio) radio.checked = true;
+      }
+      return saved.step >= 1 && saved.step <= 4 ? saved.step : 1;
+    }
+
+    function newId() {
+      return crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2);
+    }
+
+    // ---- Meta step ----
+    function copyPartnerId(btn) {
+      navigator.clipboard.writeText(META_PARTNER_ID).then(() => {
+        btn.textContent = 'Copied';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 1500);
+      });
+    }
+
+    // ---- Start up ----
+    document.getElementById('meta-partner-id').textContent = META_PARTNER_ID;
+    if (META_VIDEO_URL) {
+      const video = document.getElementById('meta-video');
+      video.innerHTML = '<iframe src="' + META_VIDEO_URL + '" allow="fullscreen; picture-in-picture" allowfullscreen></iframe>';
+      video.style.display = 'block';
+    }
+
+    FIELDS.forEach((id) => document.getElementById(id).addEventListener('input', saveProgress));
+    document.querySelectorAll('input[name="meta"]').forEach((r) => r.addEventListener('change', saveProgress));
+
+    const startStep = restoreProgress();
+    history.replaceState({ step: 1 }, '');
+    if (startStep > 1) {
+      // Rebuild the history so the Back button still walks through earlier steps
+      for (let i = 2; i <= startStep; i++) history.pushState({ step: i }, '');
+      showStep(startStep);
     }
   </script>
 
