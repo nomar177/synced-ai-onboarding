@@ -7,6 +7,7 @@
  * That keeps the same URL, so the form doesn't need to change.
  */
 
+const VERSION = '2026-09-21';  // bump before each deploy; open the /exec URL in a browser to see what's live
 const SHEET_NAME = 'Onboarding';
 const NOTIFY_EMAIL = 'info@syncedlead.com';  // who gets an email when a client finishes; '' turns it off
 
@@ -33,6 +34,11 @@ const META_LABELS = {
   needs_help: 'Needs help',
   later: 'Will do later',
 };
+
+// Health check: confirms which version is deployed without touching the sheet
+function doGet() {
+  return json({ ok: true, version: VERSION });
+}
 
 function doPost(e) {
   const lock = LockService.getScriptLock();
